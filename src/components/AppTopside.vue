@@ -1,4 +1,5 @@
 <template>
+  {{ user }}
   <div class="top">
     <router-link to="/"><img src="@/assets/chatify-logo-cut.png" alt="logo" class="logo"></router-link>
     <div class="nav">
@@ -28,27 +29,28 @@
       </transition>
       <div>
         <img src="./../assets/Icône-burger.svg" alt="burger" class="icon"
-        @click="Menu" @keydown.enter="Menu" @keydown.space="Menu">
+        @click="menu" @keydown.enter="menu" @keydown.space="menu">
       <transition name="slide-right">
       <div v-if="isMenuOpen" class="burger-dropdown">
-        <ul v-if="user">
-          <li><router-link to="/profile">Mon compte</router-link></li>
-          <li><router-link to="/discussion">Mes discussions</router-link></li>
-          <li><router-link to="/creatediscussion">Créer une discussion</router-link></li>
-          <li><router-link to="/favoris">Mes favoris</router-link></li>
+        <ul v-if="user.id && user.id !== 1">
+          <li><router-link @click="menu" to="/profile">Mon compte</router-link></li>
+          <li><router-link @click="menu" to="/listeDiscussions">Les discussions</router-link></li>
+          <li><router-link @click="menu" to="/creatediscussion">Créer une discussion</router-link></li>
+          <li><router-link @click="menu" to="/mesdiscussions">Mes discussions</router-link></li>
+          <li><router-link @click="menu" to="/favoris">Mes favoris</router-link></li>
           <li><a href="/login" @click="logout" class="deco">Se déconnecter</a></li>
         </ul>
-        <ul v-if="admin">
-          <li><router-link to="/profile">Mon compte</router-link></li>
-          <li><router-link to="/discussion">Mes discussions</router-link></li>
-          <li><router-link to="/creatediscussion">Créer une discussion</router-link></li>
-          <li><router-link to="/favoris">Mes favoris</router-link></li>
-          <li><router-link to="/profile">Mon Compte</router-link></li>
+        <ul v-if="user.id && user.id === 1">
+          <li><router-link @click="menu"  to="/profile">Mon compte</router-link></li>
+          <li><router-link @click="menu"  to="/discussion">Mes discussions</router-link></li>
+          <li><router-link @click="menu"  to="/creatediscussion">Créer une discussion</router-link></li>
+          <li><router-link @click="menu"  to="/favoris">Mes favoris</router-link></li>
+          <li><router-link @click="menu"  to="/profile">Mon Compte</router-link></li>
           <li><a href="/login" @click="logout" class="deco">Se déconnecter</a></li>
         </ul>
         <ul v-else>
-          <li><router-link to="/inscription">Inscription</router-link></li>
-          <li><router-link to="/login">Login</router-link></li>
+          <li><router-link @click="menu" to="/inscription">Inscription</router-link></li>
+          <li><router-link @click="menu" to="/login">Login</router-link></li>
         </ul>
       </div>
     </transition>
@@ -59,12 +61,20 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
-//import logo from '@/assets/chatify-logo-cut.png';
 
+const store = useStore();
 const router = useRouter();
+const user = computed(() => store.state.user || {});
+
+// onMounted( () =>{
+//   const user = computed(() => store.state.user || {});
+// })
+
+
+
 const isSearchOpen = ref(false);
 const searchQuery = ref('');
 const isMenuOpen = ref(false);
@@ -72,7 +82,7 @@ const isMenuOpen = ref(false);
 const toggleSearch = () => {
   isSearchOpen.value = !isSearchOpen.value;
 };
-const Menu = () => {
+const menu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
@@ -89,21 +99,15 @@ const handleKeydown = (event: KeyboardEvent) => {
     Search();
   }
 };
-const store = useStore();
 
-const user = computed(() => store.getters.getUser);
 
-// Computed property for admin check
-const admin = computed(() => user.value?.isAdmin ?? false);
-
-onMounted(() => {
-  store.dispatch('fetchUsers');
-});
 
 const logout = () => {
   store.dispatch('logout');
-  router.push('/FormLogin');
+  menu();
+  router.push('/login');
 };
+
 </script>
 
 
