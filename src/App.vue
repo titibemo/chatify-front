@@ -1,30 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <Topside/>
   <router-view/>
+  <Bottomside/>
 </template>
 
+<script setup>
+import Topside from '@/components/AppTopside.vue';
+import Bottomside from '@/components/AppBottomside.vue';
+</script>
+
 <style lang="scss">
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  height: 100%;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+h1, h2 {
+  font-family: var(--font-fraunces);
+}
+p, label, button, a {
+  font-family: var(--font-montserrat);
 }
 </style>

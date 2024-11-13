@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
+import MentionLegales from '@/views/MentionLegales.vue'
+import PolitiqueConfidentialite from '@/views/PolitiqueConfidentialite.vue'
+import ProfileUser from '@/views/ProfileUser.vue'
+import InscriptionView from '@/views/InscriptionView.vue'
+import MesDiscussions from '@/views/MesDiscussions.vue'
+import CreateDiscussion from '@/views/CreateDiscussion.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,13 +15,40 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/inscription',
+    name: 'inscription',
+    component: InscriptionView
+  },
+  {
+    path: '/mentionlegales',
+    name: 'mentionlegales',
+    component: MentionLegales
+  },
+  {
+    path: '/cgu',
+    name: 'cgu',
+    component: PolitiqueConfidentialite,
+  },
+  {
+    path: '/Decouvrirprofil',
+    name: 'Decouvrirprofil',
+    component: ProfileUser,
+  },
+  {
+    path: '/mesdiscussions',
+    name: 'mes discussions',
+    component: MesDiscussions,
+  },
+  {
+    path: '/creatediscussion',
+    name: 'create discussion',
+    component: CreateDiscussion,
+  },
 ]
 
 const router = createRouter({
