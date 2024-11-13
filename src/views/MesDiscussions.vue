@@ -79,6 +79,16 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const user = computed(() => store.state.user || {});
+const idUser = user.value.id
+console.log(user);
+console.log(user.value);
+console.log(idUser);
 
 </script>
 

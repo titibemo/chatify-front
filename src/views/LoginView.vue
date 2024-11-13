@@ -45,10 +45,8 @@ const setTokenStore = (token) => {
   store.commit('setToken', token);
   store.commit('createToken', token);
 
-  router.push('/Decouvrirprofil')
+  router.push('/mesdiscussions')
 };
-
-
 
 const login = async () => {
   const data = {
