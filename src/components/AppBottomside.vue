@@ -21,7 +21,7 @@ const ml = () => {
 .footer {
   width: 100%;
   padding: 16px;
-  background-color: #4c4c92;
+  background-color: #495A91;
   font-size: 12px;
   line-height: 1.6;
 }

@@ -69,9 +69,9 @@ const store = useStore();
 const router = useRouter();
 const user = computed(() => store.state.user || {});
 
-// onMounted( () =>{
-//   const user = computed(() => store.state.user || {});
-// })
+onMounted( () =>{
+  const user = computed(() => store.state.user || {});
+})
 
 
 
@@ -120,12 +120,14 @@ const logout = () => {
   }
 
   .top {
-    background-color: #4c4c92;
+    background-color: #495A91;
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     padding: 16px;
+    position: relative;
 
   }
 
@@ -137,20 +139,24 @@ const logout = () => {
   }
 
   .icon {
-    width: 7vw;
-    height: 5vh;
-    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    color: white;
   }
 
   .icon2 {
-    width: 7vw;
-    height: 5vh;
-    margin-left: 245px;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
   }
 
   .logo {
-   /* margin-left: -275px;*/
+    position: absolute;
     height: 40px;
+    top: 15px;
+    left: 15px
+
   }
 
   .search-container {
@@ -192,18 +198,25 @@ const logout = () => {
     font-weight: bolder;
   }
 
-  .slide-right-enter-active, .slide-right-leave-active {
-    transition: transform 0.5s ease;
+  .slide-right-enter-active {
+    transition: all 0.3s ease-out;
+  }
+  
+  .slide-right-leave-active {
+    transition: all 0.3s ease-in;
+  }
+  
+  .slide-right-enter-from,
+  .slide-right-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
   }
 
-  .slide-right-enter, .slide-right-leave-to {
-    transform: translateX(100%);
-  }
+
   .burger-dropdown {
     position: absolute;
-    top: 80px;
+    top: 60px;
     right: 0;
-    width: 100vw;
     background-color: rgba(73, 90, 145, 1);
     padding: 10px;
     display: flex;
@@ -211,7 +224,6 @@ const logout = () => {
     align-items: center;
     justify-content: flex-start;
     z-index: 101;
-    height: 100%;
   }
 
   .burger-dropdown ul {
@@ -220,8 +232,14 @@ const logout = () => {
   }
 
   .burger-dropdown ul li {
-    margin: 10px 0;
+    /*margin: 10px 0;*/
+    border-bottom: 1px solid #2a2240;
   }
+
+  .burger-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+
 
   .burger-dropdown ul li a {
     text-decoration: none;
