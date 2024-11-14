@@ -7,6 +7,7 @@ import ProfileUser from '@/views/ProfileUser.vue'
 import InscriptionView from '@/views/InscriptionView.vue'
 import MesDiscussions from '@/views/MesDiscussions.vue'
 import CreateDiscussion from '@/views/CreateDiscussion.vue'
+import Test from '@/views/TestView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -48,6 +49,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/creatediscussion',
     name: 'create discussion',
     component: CreateDiscussion,
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: Test,
   },
 ]
 
