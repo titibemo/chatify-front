@@ -35,8 +35,8 @@ const routes: Array<RouteRecordRaw> = [
     component: PolitiqueConfidentialite,
   },
   {
-    path: '/Decouvrirprofil',
-    name: 'Decouvrirprofil',
+    path: '/profile',
+    name: 'mon_profil',
     component: ProfileUser,
   },
   {

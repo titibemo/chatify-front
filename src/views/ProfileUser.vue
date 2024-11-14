@@ -1,28 +1,38 @@
 <template>
   <div class="main">
     <div v-if="user" class="contenu">
-      <p>{{ user.email }}</p>
-      <p>{{ user.username }}</p>
-      <!-- Note: Remove password display in a real application for security reasons -->
+    <h1>Mon profil</h1>
+      <p>Email: {{ user.email }}</p>
+      <p>Pseaudo: {{ user.username }}</p>
+     
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const store = useStore();
 
+const email = ref('');
+const username = ref('');
+const newPassword = ref('');
+
+const profile = async () => {
+  const data = {
+    email: email.value,
+    username: username.value,
+    password: password.value,
+  };
+  console.log(data);
+}
 const user = computed(() => store.getters.user);
 
-onMounted(() => {
-  store.dispatch('fetchUsers').catch(error => {
-    console.error('Failed to fetch user data:', error);
-  });
-});
+console.log(user);
+
 
 const logout = () => {
   store.dispatch('logout');
@@ -60,6 +70,9 @@ const info = () => {
     max-width: 400px;
     margin: auto;
   }
-  /* Remaining styles unchanged */
+
+}
+form {
+  color: #fff;
 }
 </style>
